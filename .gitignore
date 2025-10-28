@@ -1,0 +1,221 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Project specific
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+logs/
+*.log
+
+# Configuration files with sensitive data
+config/.env
+config/local.yaml
+.env.local
+config/production.yaml
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+data/storage/*.db
+data/storage/*.sqlite*
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Cache
+.cache/
+cache/
+
+# Output files
+output/
+results/
+plots/
+*.png
+*.jpg
+*.jpeg
+*.pdf
+!docs/images/
+
+# Trading data (if any)
+trading_data/
+live_data/
+
+# Model files
+models/
+*.pkl
+*.model
+*.h5
+*.hdf5
+
+# Performance data
+performance/
+benchmarks/
+
+# Secrets and credentials
+secrets/
+credentials/
+*.key
+*.pem
+*.crt
+
+# Backup files
+*.bak
+*.backup
+
+# Compressed files
+*.zip
+*.tar.gz
+*.rar
+
+# Documentation build
+docs/build/
+docs/source/_build/
+
+# Jupyter notebooks output
+notebooks/output/
+notebooks/.ipynb_checkpoints/
+
+# Data files (large files that should not be in git)
+*.csv
+*.xlsx
+*.xls
+*.parquet
+*.feather
+*.h5
+!config/examples/
+!tests/test_data/
+
+# API keys and tokens (keep examples but not real ones)
+**/api_keys.txt
+**/tokens.txt
+!config/examples/api_keys.example.txt
+.spec-workflow
