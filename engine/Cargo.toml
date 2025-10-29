@@ -5,37 +5,20 @@ edition = "2024"
 
 [dependencies]
 anyhow = "1.0.100"
-chrono = { version = "0.4.42", features = ["serde"] }
-config = "0.15.18"
-num-complex = "0.4.6"
 numpy = "0.27.0"
-ordered-float = "5.1.0"
-polars = { version = "0.51.0", features = ["lazy", "temporal", "strings"] }
 pyo3 = { version = "0.27.1", features = ["extension-module", "abi3-py311"] }
-reqwest = { version = "0.12.24", features = ["json", "cookies"] }
 serde = { version = "1.0.228", features = ["derive"] }
-serde_json = "1.0.145"
-thiserror = "2.0.17"
-tokio = { version = "1.48.0", features = ["full"] }
-tokio-util = "0.7.16"
-toml = "0.9.8"
-tracing = "0.1.41"
-tracing-subscriber = { version = "0.3.20", features = ["env-filter"] }
+tokio = { version = "1.48.0", features = ["rt-multi-thread"] }
 
-[dev-dependencies]
-criterion = { version = "0.7.0", features = ["html_reports"] }
-tempfile = "3.23.0"
-tokio-test = "0.4.4"
 
-# 配置库类型
 [lib]
 name = "pulse_trader_engine"
 crate-type = ["cdylib", "rlib"]
 
-# 基准测试配置 (暂时移除，待需要时添加)
-# [[bench]]
-# name = "indicators"
-# harness = false
+[package.metadata.maturin]
+features = ["pyo3/extension-module"]
+module-name = "pulse_trader_engine._pulse_trader_engine"
+python-source = "../"
 
 # 发布优化配置
 [profile.release]
@@ -43,8 +26,3 @@ opt-level = 3
 lto = true
 codegen-units = 1
 panic = "abort"
-
-# 开发配置
-[profile.dev]
-opt-level = 1
-debug = true
