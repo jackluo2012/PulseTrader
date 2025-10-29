@@ -219,3 +219,4 @@ notebooks/.ipynb_checkpoints/
 **/tokens.txt
 !config/examples/api_keys.example.txt
 .spec-workflow
+.venv
