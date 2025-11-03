@@ -43,3 +43,5 @@ data/logs/*.log
 *.temp
 .venv
 .spec-workflow
+reports
+scripts/deleted
