@@ -1,49 +1,39 @@
-[project]
-name = "pulse-trader"
-version = "0.1.0"
-description = "A股量化交易系统"
-authors = [
-    {name = "jackluo",email = "net.webjoy@gmail.com"}
-]
-readme = "README.md"
-requires-python = ">=3.11"
-
 [tool.poetry]
 name = "pulse-trader"
 version = "0.1.0"
 description = "A股量化交易系统"
-authors = ["jackluo <net.webjoy@gmail.com>"]
-packages = [{include = "pulse_trader"}]
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+python = "^3.12"
 
 [tool.poetry.dependencies]
-python = "^3.11"
-maturin = ">=1.9.6,<2.0.0"
-tushare = ">=1.4.24,<2.0.0"
-akshare = ">=1.17.76,<2.0.0"
-pytdx = ">=1.72,<2.0"
-fastapi = ">=0.120.1,<0.121.0"
-uvicorn = ">=0.38.0,<0.39.0"
-sqlalchemy = ">=2.0.44,<3.0.0"
-python-dotenv = ">=1.2.1,<2.0.0"
+python = "^3.12"
 pandas = "^2.3.3"
-numpy = "^2.3.4"
-matplotlib = "^3.10.7"
-seaborn = "^0.13.2"
-scipy = "^1.16.3"
-websockets = "^15.0.1"
-python-socketio = "^5.14.3"
-apscheduler = "^3.11.1"
-redis = "^7.0.1"
-rich = "^14.2.0"
-click = "^8.3.0"
-dash = "^3.2.0"
-plotly = "^6.3.1"
-clickhouse-driver = "^0.2.6"
-clickhouse-connect = "^0.7.16"
+numpy = "^2.3.5"
+akshare = "^1.17.87"
+clickhouse-driver = "^0.2.10"
+clickhouse-pool = "^0.6.0"
+redis = "^5.2.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = ">=8.4.2,<9.0.0"
-pytest-cov = ">=7.0.0,<8.0.0"
-black = ">=25.9.0,<26.0.0"
-flake8 = ">=7.3.0,<8.0.0"
-mypy = ">=1.18.2,<2.0.0"
+pytest = "^8.0.0"
+black = "^24.0.0"
+pylint = "^3.0.0"
+mypy = "^1.0.0"
+maturin = "^1.10.2"
+
+[tool.maturin]
+python-source = "python"
+module-name = "pulse_trader_rust._core"
+features = ["pyo3/extension-module"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+
+[tool.pylint.messages_control]
+disable = ["C0114", "C0115", "C0116"]

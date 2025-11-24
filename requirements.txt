@@ -1,0 +1,21 @@
+# PulseTrader Python Dependencies
+# Core dependencies for quantitative trading system
+
+# Database drivers
+clickhouse-driver==0.2.7
+clickhouse-pool==0.6.1
+
+# Data processing and analysis
+pandas==2.3.3
+numpy==2.3.5
+
+# Stock market data (A-shares)
+akshare==1.17.87
+
+# Caching
+redis==7.1.0
+
+# Additional dependencies installed automatically:
+# - tzlocal (for clickhouse-driver)
+# - aiohttp, beautifulsoup4, lxml, requests (for akshare)
+# - html5lib, openpyxl, xlrd, tqdm (for akshare)

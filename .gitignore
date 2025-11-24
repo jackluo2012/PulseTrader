@@ -1,47 +1,55 @@
-# Rust
-target/
-Cargo.lock
-**/*.rs.bk
-
 # Python
 __pycache__/
 *.py[cod]
+*$py.class
 *.so
+.Python
 build/
+develop-eggs/
 dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
 *.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# 虚拟环境
+# Virtual Environment
+.venv/
 venv/
 env/
 
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# 系统文件
-.DS_Store
-Thumbs.db
-
-# 数据文件
+# Data
 data/raw/*
 data/processed/*
-data/cache/*
-data/logs/*.log
+!data/raw/.gitkeep
+!data/processed/.gitkeep
 
-# 配置文件 (包含敏感信息)
+# Logs
+logs/
+*.log
+
+# Environment Variables
 .env
 .env.local
-.env.production
 
-# 测试和覆盖率
-.coverage
-.pytest_cache/
+# Database
+*.db
+*.sqlite
 
-# 临时文件
-*.tmp
-*.temp
-.venv
-.spec-workflow
-reports
-scripts/deleted
+# OS
+.DS_Store
+Thumbs.db
