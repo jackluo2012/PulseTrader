@@ -3,25 +3,32 @@ ClickHouse数据库操作类
 提供连接管理、数据查询和插入功能
 """
 
+import json
 import logging
-from typing import List, Dict, Any, Optional
+from datetime import date, datetime
+from typing import Any, Dict, List, Optional
+
+import pandas as pd
+import redis
 from clickhouse_driver import Client
 from clickhouse_pool import ChPool
-import redis
-import pandas as pd
-from datetime import datetime, date
-import json
 
 # 配置日志
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 class ClickHouseManager:
     """ClickHouse数据库管理器"""
 
-    def __init__(self, host='localhost', port=9000,
-                 user='quant_user', password='Quant@2024',
-                 database='pulse_trader'):
+    def __init__(
+        self,
+        host="localhost",
+        port=9000,
+        user="quant_user",
+        password="Quant@2024",
+        database="pulse_trader",
+    ):
         """初始化ClickHouse连接"""
         self.host = host
         self.port = port
@@ -37,19 +44,15 @@ class ClickHouseManager:
             password=password,
             database=database,
             connections_min=5,
-            connections_max=20
+            connections_max=20,
         )
 
         # Redis缓存连接
-        self.redis_client = redis.Redis(host='localhost', port=6379, db=0)
+        self.redis_client = redis.Redis(host="localhost", port=6379, db=0)
 
         # 单例连接（用于复杂查询）
         self.client = Client(
-            host=host,
-            port=port,
-            user=user,
-            password=password,
-            database=database
+            host=host, port=port, user=user, password=password, database=database
         )
 
         logger.info("ClickHouse连接初始化完成")
@@ -57,7 +60,7 @@ class ClickHouseManager:
     def test_connection(self) -> bool:
         """测试数据库连接"""
         try:
-            result = self.client.execute('SELECT 1')
+            result = self.client.execute("SELECT 1")
             if result[0][0] == 1:
                 logger.info("ClickHouse连接测试成功")
                 return True
@@ -85,7 +88,7 @@ class ClickHouseManager:
                     SELECT * FROM stock_info
                     WHERE symbol = %(symbol)s AND is_active = 1
                 """
-                params = {'symbol': symbol}
+                params = {"symbol": symbol}
             else:
                 query = """
                     SELECT * FROM stock_info
@@ -95,8 +98,17 @@ class ClickHouseManager:
                 params = {}
 
             result = self.client.execute(query, params)
-            columns = ['symbol', 'name', 'market', 'industry', 'sector',
-                      'list_date', 'delist_date', 'is_active', 'created_at']
+            columns = [
+                "symbol",
+                "name",
+                "market",
+                "industry",
+                "sector",
+                "list_date",
+                "delist_date",
+                "is_active",
+                "created_at",
+            ]
             df = pd.DataFrame(result, columns=columns)
 
             return df
@@ -108,14 +120,15 @@ class ClickHouseManager:
     def close(self):
         """关闭连接"""
         try:
-            if hasattr(self, 'pool'):
+            if hasattr(self, "pool"):
                 # ChPool doesn't have a close method, but individual connections do
                 pass
-            if hasattr(self, 'redis_client'):
+            if hasattr(self, "redis_client"):
                 self.redis_client.close()
             logger.info("ClickHouse连接已关闭")
         except Exception as e:
             logger.error(f"关闭连接时发生错误: {e}")
+
 
 # 创建全局数据库管理器实例
 db_manager = ClickHouseManager()

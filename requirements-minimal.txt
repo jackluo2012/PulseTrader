@@ -1,0 +1,8 @@
+# 最小核心依赖 - 必需的基础功能
+pandas==2.3.3
+numpy==2.3.5
+clickhouse-driver==0.2.7
+clickhouse-pool==0.6.1
+redis==5.0.1
+akshare==1.17.87
+pyyaml==6.0.3

@@ -4,11 +4,13 @@ ClickHouse数据库功能测试脚本
 验证数据库连接、查询和基础操作
 """
 
-import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 
 from src.data.database import db_manager
+
 
 def test_basic_operations():
     """测试基础数据库操作"""
@@ -37,6 +39,7 @@ def test_basic_operations():
     print("\n=== 数据库功能测试完成 ===")
     return True
 
+
 def cleanup():
     """清理资源"""
     print("\n清理数据库连接...")
@@ -45,6 +48,7 @@ def cleanup():
         print("✓ 数据库连接已关闭")
     except Exception as e:
         print(f"✗ 清理失败: {e}")
+
 
 if __name__ == "__main__":
     success = True
