@@ -53,4 +53,4 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
- .claude-flow/
+.claude-flow
