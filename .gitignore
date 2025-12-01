@@ -54,3 +54,5 @@ logs/
 .DS_Store
 Thumbs.db
 .claude-flow
+data/tdx
+rust/target

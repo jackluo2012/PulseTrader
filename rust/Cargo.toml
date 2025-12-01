@@ -1,0 +1,89 @@
+[package]
+name = "pulse-trader-rust"
+version = "0.1.0"
+edition = "2021"
+authors = ["jackluo <net.webjoy@gmail.com>"]
+description = "高性能量化交易数据处理模块"
+license = "MIT"
+readme = "../README.md"
+repository = "https://github.com/jackluo2012/PulseTrader"
+
+[lib]
+name = "pulse_trader_rust"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# Python绑定
+pyo3 = { version = "0.27.1", features = ["extension-module"], optional = true }
+
+# 异步运行时
+tokio = { version = "1.48.0", features = ["full"] }
+
+# 数据库
+clickhouse-rs = "0.1.21"
+
+# 序列化
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0.145"
+
+# 错误处理
+anyhow = "1.0.100"
+thiserror = "2.0.17"
+
+# 日志
+log = "0.4.28"
+env_logger = "0.11.8"
+
+# 并发
+rayon = "1.11.0"
+
+# 时间处理
+chrono = { version = "0.4.42", features = ["serde"] }
+
+# 数值处理
+num-traits = "0.2.19"
+
+# 压缩
+flate2 = "1.1.5"
+zip = "0.6"
+zip-extensions = "0.6"
+
+# 文件系统
+walkdir = "2.0"
+
+# 配置
+config = "0.14"
+
+# URL解析
+url = "2.4"
+
+# HTTP客户端（用于下载）
+reqwest = { version = "0.11", features = ["json"] }
+
+# 进度条
+indicatif = "0.17"
+
+# 二进制IO
+byteorder = "1.4"
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+tempfile = "3.0"
+pretty_assertions = "1.0"
+
+[[bench]]
+name = "tdx_parser_bench"
+harness = false
+
+[features]
+default = ["python-bindings"]
+python-bindings = ["pyo3"]
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+opt-level = 3
+
+[profile.bench]
+debug = true
