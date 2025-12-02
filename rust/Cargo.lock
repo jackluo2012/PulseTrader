@@ -1902,6 +1902,7 @@ dependencies = [
  "indicatif",
  "log",
  "num-traits",
+ "num_cpus",
  "pretty_assertions",
  "pyo3",
  "rayon",

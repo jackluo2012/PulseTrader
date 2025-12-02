@@ -1,0 +1,75 @@
+# 数据质量配置
+
+validation_rules:
+  price_data:
+    required_columns: ["symbol", "date", "open", "high", "low", "close", "volume"]
+    numeric_columns: ["open", "high", "low", "close", "volume"]
+    positive_columns: ["open", "high", "low", "close", "volume"]
+
+    price_constraints:
+      max_change_percent: 0.20      # 最大涨跌幅
+      min_price: 0.01              # 最小价格
+      max_price: 10000             # 最大价格
+      min_volume: 0                # 最小成交量
+      max_volume: 100000000000     # 最大成交量
+
+    quality_thresholds:
+      missing_ratio_max: 0.05      # 最大缺失值比例 5%
+      duplicate_ratio_max: 0.01    # 最大重复值比例 1%
+      completeness_ratio_min: 0.95 # 最小完整性 95%
+
+  stock_info:
+    required_columns: ["symbol", "stock_name"]
+    string_columns: ["symbol", "stock_name"]
+    symbol_pattern: "^\\d{6}$"
+
+    constraints:
+      symbol_length: 6
+      name_max_length: 50
+
+cleaning_rules:
+  missing_values:
+    default_strategy: "interpolate"  # interpolate, fill, drop
+    fill_methods:
+      numeric: "median"
+      string: "mode"
+
+  outliers:
+    detection_method: "iqr"          # iqr, zscore
+    action: "cap"                    # cap, remove, transform
+    iqr_multiplier: 1.5
+
+  duplicates:
+    strategy: "keep_first"           # keep_first, keep_last, drop_all
+
+  price_consistency:
+    enable_correction: true
+    correction_method: "clip"        # clip, adjust
+
+transformation_rules:
+  technical_indicators:
+    enable: true
+    indicators:
+      - ma: [5, 10, 20, 60]
+      - ema: [12, 26]
+      - macd: {}
+      - rsi: {}
+      - bollinger_bands: {}
+      - stoch: {}
+
+  feature_engineering:
+    lag_features: [1, 2, 3, 5, 10]
+    rolling_windows: [5, 10, 20]
+    time_features: true
+    interaction_features: true
+
+monitoring:
+  alerts:
+    high_error_rate: 0.10           # 错误率超过10%告警
+    low_completeness: 0.90          # 完整性低于90%告警
+    data_freshness: 24               # 数据超过24小时未更新告警
+
+  logging:
+    level: "INFO"
+    save_logs: true
+    log_retention_days: 30

@@ -8,7 +8,8 @@
 
 pub mod parsers;
 
-// 重新导出主要接口
+pub mod processors; // TODO: 并行数据处理模块
+                    // 重新导出主要接口
 pub use parsers::tdx_day::{TDXDayParser, TDXDayRecord, TDXStatistics};
 
 /// 库版本信息
